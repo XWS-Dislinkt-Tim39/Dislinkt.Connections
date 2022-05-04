@@ -31,5 +31,8 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
 
         public async Task CreateConnectionAsync(Guid sourceId, Guid targetId, string connectionName)
             => await _neo4jDbContext.CreateConnectionAsync(sourceId, targetId, connectionName);
+
+        public async Task RemoveConnectionAsync(Guid sourceId, Guid targetId, string connectionName)
+            => await _neo4jDbContext.RemoveConnectionAsync(sourceId, targetId, connectionName);
     }
 }

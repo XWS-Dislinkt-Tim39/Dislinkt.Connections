@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Dislinkt.Connections.Application.CreateConnection.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
+using Dislinkt.Connections.Application.RemoveConnection.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -73,7 +74,13 @@ namespace Dislinkt.Connections.WebApi.Controllers
         public async Task<bool> CreateConnection(ConnectionData connectionData)
         {
             return await _mediator.Send(new CreateConnectionCommand(connectionData));
+        }
 
+        [HttpPost]
+        [Route("/removeConnection")]
+        public async Task<bool> RemoveConnection(ConnectionData connectionData)
+        {
+            return await _mediator.Send(new RemoveConnectionCommand(connectionData));
         }
     }
 }

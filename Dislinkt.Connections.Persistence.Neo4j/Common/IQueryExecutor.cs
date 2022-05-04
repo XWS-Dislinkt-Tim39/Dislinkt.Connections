@@ -13,6 +13,7 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
         Task DeleteByIdAsync<T>(Guid id) where T : BaseEntity;
         Task UpdateAsync<T>(Guid id, T t) where T : BaseEntity;
         Task CreateConnectionAsync(Guid sourceId, Guid targetId, string connectionName);
+        Task RemoveConnectionAsync(Guid sourceId, Guid targetId, string connectionName);
 
     }
 }

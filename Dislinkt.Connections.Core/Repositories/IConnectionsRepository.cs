@@ -11,7 +11,7 @@ namespace Dislinkt.Connections.Core.Repositories
         Task<User> FindUserByIdAsync(Guid id);
         Task CreateUser(User user);
         Task CreateConnectionAsync(Guid sourceId, Guid targetId, string connectionName);
-        Task DeleteConnectionAsync(User baseUser, User toUnfollowUser);
+        Task RemoveConnectionAsync(Guid sourceId, Guid targetId, string connectionName);
         Task BlockUserAsync(User blockingUser, User blockedUser);
         Task AddMessageRequestAsync(User baseUser, User receivingUser);
         Task<bool> IsFollowingAsync(User baseUser, User followedUser);
