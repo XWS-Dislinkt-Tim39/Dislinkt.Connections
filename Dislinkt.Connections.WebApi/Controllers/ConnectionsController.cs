@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using Dislinkt.Connections.Application.CreateConnection.Commands;
+using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
 using Dislinkt.Connections.Application.RemoveConnection.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
@@ -48,12 +50,9 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return "hello";
         }
 
-        [HttpGet]
-        [Route("/db")]
-        public async Task<string> TestDb()
-        {
-            return await Neo4jExe.Example();
-        }
+        /// <summary>
+        /// Creates a new node in graph database.
+        /// </summary>
 
         [HttpPost]
         [Route("/register-user")]
@@ -62,13 +61,9 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new RegisterUserCommand(userData));
         }
 
-        [HttpGet]
-        [Route("/testing")]
-        public async Task Testing()
-        {
-            
-        }
-
+        /// <summary>
+        /// Creates a relationship between 2 users. (e.g. a-[:FOLLOWS]->b)
+        /// </summary>
         [HttpPost]
         [Route("/createConnection")]
         public async Task<bool> CreateConnection(ConnectionData connectionData)
@@ -76,11 +71,24 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new CreateConnectionCommand(connectionData));
         }
 
+        /// <summary>
+        /// Removes a relationship between 2 users.
+        /// </summary>
         [HttpPost]
         [Route("/removeConnection")]
         public async Task<bool> RemoveConnection(ConnectionData connectionData)
         {
             return await _mediator.Send(new RemoveConnectionCommand(connectionData));
+        }
+
+        /// <summary>
+        /// Given a UserID, returns the list of followed private users.
+        /// </summary>
+        [HttpGet]
+        [Route("/getFollowingPrivate")]
+        public async Task<IReadOnlyList<Guid>> GetFollowingPrivate(Guid sourceId)
+        {
+            return await _mediator.Send(new GetFollowingPrivateCommand(sourceId));
         }
     }
 }
