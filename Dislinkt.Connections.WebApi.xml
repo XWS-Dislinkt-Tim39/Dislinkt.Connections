@@ -34,6 +34,11 @@
             Given a UserID, returns the list of followed private users.
             </summary>
         </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.ApproveFollow(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Approves a follow request.
+            </summary>
+        </member>
         <member name="T:Dislinkt.Connections.WebApi.Program">
             <summary>
             Program init
