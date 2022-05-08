@@ -28,6 +28,9 @@ namespace Dislinkt.Connections.WebApi.Controllers
     {
         private readonly IMediator _mediator;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public ConnectionsController(IMediator mediator)
         {
             _mediator = mediator;
@@ -104,6 +107,10 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new CreateFollowRequestCommand(connectionData));
         }
 
+
+        /// <summary>
+        /// Gets all follow requests for given ID.
+        /// </summary>
         [HttpGet]
         [Route("/getFollowRequests")]
         public async Task<IReadOnlyList<Guid>> GetFollowRequestsAsync(Guid sourceId)
