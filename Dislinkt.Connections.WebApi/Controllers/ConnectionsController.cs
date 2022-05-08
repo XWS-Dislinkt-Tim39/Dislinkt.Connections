@@ -88,7 +88,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Follows a user.
         /// </summary>
         [HttpPost]
-        [Route("/approveFollow")]
+        [Route("/follow")]
         public async Task<bool> FollowAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new FollowCommand(connectionData));
