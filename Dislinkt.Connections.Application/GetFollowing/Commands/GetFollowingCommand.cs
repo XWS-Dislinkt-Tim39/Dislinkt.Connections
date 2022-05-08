@@ -5,9 +5,9 @@ using MediatR;
 
 namespace Dislinkt.Connections.Application.GetFollowingPrivate.Commands
 {
-    public class GetFollowingPrivateCommand : IRequest<IReadOnlyList<Guid>>
+    public class GetFollowingCommand : IRequest<IReadOnlyList<Guid>>
     {
-        public GetFollowingPrivateCommand(Guid sourceId)
+        public GetFollowingCommand(Guid sourceId)
         {
             SourceId = sourceId;
         }

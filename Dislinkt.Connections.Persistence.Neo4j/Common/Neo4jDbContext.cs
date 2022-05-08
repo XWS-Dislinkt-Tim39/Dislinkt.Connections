@@ -130,7 +130,7 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
             }
         }
 
-        public async Task<IReadOnlyList<Guid>> GetFollowingPrivate(Guid sourceId)
+        public async Task<IReadOnlyList<Guid>> GetFollowing(Guid sourceId)
         {
             var query = "MATCH (n)-[:FOLLOWS]->(m) " +
                         $"WHERE n.Id = \"{sourceId}\" " +

@@ -19,22 +19,32 @@
             Creates a new node in graph database.
             </summary>
         </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.CreateConnection(Dislinkt.Connections.ConnectionData)">
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.CreateConnectionAsync(Dislinkt.Connections.ConnectionData)">
             <summary>
             Creates a relationship between 2 users. (e.g. a-[:FOLLOWS]->b)
             </summary>
         </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RemoveConnection(Dislinkt.Connections.ConnectionData)">
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RemoveConnectionAsync(Dislinkt.Connections.ConnectionData)">
             <summary>
             Removes a relationship between 2 users.
             </summary>
         </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowingPrivate(System.Guid)">
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowingAsync(System.Guid)">
             <summary>
             Given a UserID, returns the list of followed private users.
             </summary>
         </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.ApproveFollow(Dislinkt.Connections.ConnectionData)">
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.FollowAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Follows a user.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.CreateFollowRequestAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Creates a follow request for private profiles.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.ApproveFollowAsync(Dislinkt.Connections.ConnectionData)">
             <summary>
             Approves a follow request.
             </summary>

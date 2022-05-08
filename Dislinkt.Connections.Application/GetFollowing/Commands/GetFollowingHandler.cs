@@ -9,16 +9,16 @@ using MediatR;
 
 namespace Dislinkt.Connections.Application.GetFollowingPrivate.Commands
 {
-    public class GetFollowingPrivateHandler : IRequestHandler<GetFollowingPrivateCommand, IReadOnlyList<Guid>>
+    public class GetFollowingHandler : IRequestHandler<GetFollowingCommand, IReadOnlyList<Guid>>
     {
         private readonly IConnectionsRepository _connectionRepository;
 
-        public GetFollowingPrivateHandler(IConnectionsRepository connectionRepository)
+        public GetFollowingHandler(IConnectionsRepository connectionRepository)
         {
             _connectionRepository = connectionRepository;
         }
 
-        public async Task<IReadOnlyList<Guid>> Handle(GetFollowingPrivateCommand request,
+        public async Task<IReadOnlyList<Guid>> Handle(GetFollowingCommand request,
             CancellationToken cancellationToken)
         {
             IReadOnlyList<Guid> retVal = new List<Guid>();

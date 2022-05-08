@@ -80,7 +80,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/getFollowing")]
         public async Task<IReadOnlyList<Guid>> GetFollowingAsync(Guid sourceId)
         {
-            return await _mediator.Send(new GetFollowingPrivateCommand(sourceId));
+            return await _mediator.Send(new GetFollowingCommand(sourceId));
         }
 
         /// <summary>
