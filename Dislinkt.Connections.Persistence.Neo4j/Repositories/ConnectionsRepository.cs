@@ -48,9 +48,9 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Repositories
             await _queryExecutor.RemoveConnectionAsync(sourceId, targetId, connectionName);
         }
 
-        public async Task<IReadOnlyList<Guid>> GetFollowingPrivate(Guid sourceId)
+        public async Task<IReadOnlyList<Guid>> GetConnected(Guid sourceId, string connectionType)
         {
-            return await _queryExecutor.GetFollowingPrivate(sourceId);
+            return await _queryExecutor.GetConnected(sourceId, );
         }
 
         public async Task BlockUserAsync(User blockingUser, User blockedUser)

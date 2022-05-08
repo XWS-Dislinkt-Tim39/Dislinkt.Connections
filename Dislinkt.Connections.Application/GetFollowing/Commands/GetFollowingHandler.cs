@@ -24,7 +24,7 @@ namespace Dislinkt.Connections.Application.GetFollowingPrivate.Commands
             IReadOnlyList<Guid> retVal = new List<Guid>();
             try
             {
-                retVal = await _connectionRepository.GetFollowingPrivate(request.SourceId);
+                retVal = await _connectionRepository.GetConnected(request.SourceId, "FOLLOWS");
             }
             catch (Exception ex)
             {

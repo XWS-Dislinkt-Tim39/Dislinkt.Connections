@@ -8,6 +8,7 @@ using Dislinkt.Connections.Application.CreateConnection.Commands;
 using Dislinkt.Connections.Application.CreateFollowRequest.Commands;
 using Dislinkt.Connections.Application.Follow.Commands;
 using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
+using Dislinkt.Connections.Application.GetFollowRequests.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
 using Dislinkt.Connections.Application.RemoveConnection.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
@@ -103,6 +104,13 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new CreateFollowRequestCommand(connectionData));
         }
 
+        [HttpGet]
+        [Route("/getFollowRequests")]
+        public async Task<IReadOnlyList<Guid>> GetFollowRequestsAsync(Guid sourceId)
+        {
+            return await _mediator.Send(new GetFollowRequestsCommand(sourceId));
+        }
+
         /// <summary>
         /// Approves a follow request.
         /// </summary>
@@ -112,6 +120,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             return await _mediator.Send(new ApproveFollowCommand(connectionData));
         }
+
+
 
     }
 }

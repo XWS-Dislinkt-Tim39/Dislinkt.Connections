@@ -11,7 +11,7 @@ namespace Dislinkt.Connections.Application.Follow.Commands
 {
     public class FollowHandler : IRequestHandler<FollowCommand, bool>
     {
-        IConnectionsRepository _connectionsRepository;
+        private readonly IConnectionsRepository _connectionsRepository;
 
         public FollowHandler(IConnectionsRepository connectionsRepository)
         {

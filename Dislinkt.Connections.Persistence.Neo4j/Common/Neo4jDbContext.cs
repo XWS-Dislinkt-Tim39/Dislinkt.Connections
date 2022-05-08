@@ -14,10 +14,12 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
     public class Neo4jDbContext
     {
         private readonly IDatabaseFactory _databaseFactory;
+
         public Neo4jDbContext(IDatabaseFactory databaseFactory)
         {
             _databaseFactory = databaseFactory;
         }
+
         public async Task<T> FindByIdAsync<T>(Guid id) where T : BaseEntity
         {
             var query = @"
@@ -55,7 +57,7 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
             {
                 query += field.Name.Substring(1, Math.Max(field.Name.IndexOf('>') - 1, 0)) + @": """;
                 query += field.GetValue(t);
-                query += @""", ";   
+                query += @""", ";
             }
 
             query = query.Remove(query.Length - 2, 1);
@@ -73,7 +75,7 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
                 throw;
             }
         }
-         
+
 
         public async Task DeleteByIdAsync<T>(Guid id) where T : BaseEntity
         {
@@ -130,9 +132,9 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
             }
         }
 
-        public async Task<IReadOnlyList<Guid>> GetFollowing(Guid sourceId)
+        public async Task<IReadOnlyList<Guid>> GetConnected(Guid sourceId, string connectionType)
         {
-            var query = "MATCH (n)-[:FOLLOWS]->(m) " +
+            var query = $"MATCH (n)-[:{connectionType}]->(m) " +
                         $"WHERE n.Id = \"{sourceId}\" " +
                         "RETURN m.Id as Id";
             IAsyncSession session = _databaseFactory.Create().AsyncSession();
@@ -145,13 +147,16 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
                     }
                 );
 
-                return readResult.Count == 0 ? null : readResult.Select(record => Guid.Parse(record["Id"].ToString() ?? string.Empty)).ToList();
+                return readResult.Count == 0
+                    ? null
+                    : readResult.Select(record => Guid.Parse(record["Id"].ToString() ?? string.Empty)).ToList();
             }
             catch (Neo4jException ex)
             {
                 Trace.WriteLine($"{query} - {ex}");
                 throw;
             }
+
         }
 
     }
