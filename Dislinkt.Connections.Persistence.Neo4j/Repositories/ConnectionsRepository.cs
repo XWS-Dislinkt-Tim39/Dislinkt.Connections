@@ -50,7 +50,7 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Repositories
 
         public async Task<IReadOnlyList<Guid>> GetConnected(Guid sourceId, string connectionType)
         {
-            return await _queryExecutor.GetConnected(sourceId, connectionType);
+            return await _queryExecutor.GetConnectedAsync(sourceId, connectionType);
         }
 
         public async Task BlockUserAsync(User blockingUser, User blockedUser)
