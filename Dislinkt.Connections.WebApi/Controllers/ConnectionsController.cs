@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dislinkt.Connections.Application.ApproveFollow.Commands;
 using Dislinkt.Connections.Application.CreateConnection.Commands;
 using Dislinkt.Connections.Application.CreateFollowRequest.Commands;
+using Dislinkt.Connections.Application.Follow.Commands;
 using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
 using Dislinkt.Connections.Application.RemoveConnection.Commands;
@@ -16,17 +17,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Dislinkt.Connections.WebApi.Controllers
 {
 
-    public class Test
-    {
-        public int TestAttr { get; set; }
-        public int TestAttr2 { get; set; }
-
-        public Test()
-        {
-            TestAttr = 1;
-            TestAttr2 = 2;
-        }
-    }
     /// <summary>
     /// Main controller
     /// </summary>
@@ -57,7 +47,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// </summary>
 
         [HttpPost]
-        [Route("/register-user")]
+        [Route("/registerUser")]
         public async Task<bool> RegisterUserAsync(UserData userData)
         {
             return await _mediator.Send(new RegisterUserCommand(userData));
@@ -68,7 +58,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// </summary>
         [HttpPost]
         [Route("/createConnection")]
-        public async Task<bool> CreateConnection(ConnectionData connectionData)
+        public async Task<bool> CreateConnectionAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new CreateConnectionCommand(connectionData));
         }
@@ -78,7 +68,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// </summary>
         [HttpPost]
         [Route("/removeConnection")]
-        public async Task<bool> RemoveConnection(ConnectionData connectionData)
+        public async Task<bool> RemoveConnectionAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new RemoveConnectionCommand(connectionData));
         }
@@ -87,15 +77,28 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Given a UserID, returns the list of followed private users.
         /// </summary>
         [HttpGet]
-        [Route("/getFollowingPrivate")]
-        public async Task<IReadOnlyList<Guid>> GetFollowingPrivate(Guid sourceId)
+        [Route("/getFollowing")]
+        public async Task<IReadOnlyList<Guid>> GetFollowingAsync(Guid sourceId)
         {
             return await _mediator.Send(new GetFollowingPrivateCommand(sourceId));
         }
 
+        /// <summary>
+        /// Follows a user.
+        /// </summary>
+        [HttpPost]
+        [Route("/approveFollow")]
+        public async Task<bool> FollowAsync(ConnectionData connectionData)
+        {
+            return await _mediator.Send(new FollowCommand(connectionData));
+        }
+
+        /// <summary>
+        /// Creates a follow request for private profiles.
+        /// </summary>
         [HttpPost]
         [Route("/createFollowRequest")]
-        public async Task<bool> CreateFollowRequest(ConnectionData connectionData)
+        public async Task<bool> CreateFollowRequestAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new CreateFollowRequestCommand(connectionData));
         }
@@ -105,9 +108,10 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// </summary>
         [HttpPost]
         [Route("/approveFollow")]
-        public async Task<bool> ApproveFollow(ConnectionData connectionData)
+        public async Task<bool> ApproveFollowAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new ApproveFollowCommand(connectionData));
         }
+
     }
 }
