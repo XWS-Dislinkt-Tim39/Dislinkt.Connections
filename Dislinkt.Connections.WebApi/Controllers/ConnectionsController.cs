@@ -11,6 +11,7 @@ using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
 using Dislinkt.Connections.Application.GetFollowRequests.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
 using Dislinkt.Connections.Application.RemoveConnection.Commands;
+using Dislinkt.Connections.Application.Unfollow.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -95,6 +96,16 @@ namespace Dislinkt.Connections.WebApi.Controllers
         public async Task<bool> FollowAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new FollowCommand(connectionData));
+        }
+
+        /// <summary>
+        /// Unfollows a user.
+        /// </summary>
+        [HttpPost]
+        [Route("/follow")]
+        public async Task<bool> UnfollowAsync(ConnectionData connectionData)
+        {
+            return await _mediator.Send(new UnfollowCommand(connectionData));
         }
 
         /// <summary>
