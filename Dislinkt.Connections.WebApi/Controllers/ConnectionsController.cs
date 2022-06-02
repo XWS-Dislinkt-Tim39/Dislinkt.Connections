@@ -102,7 +102,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Unfollows a user.
         /// </summary>
         [HttpPost]
-        [Route("/follow")]
+        [Route("/unfollow")]
         public async Task<bool> UnfollowAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new UnfollowCommand(connectionData));
