@@ -9,6 +9,11 @@
             Main controller
             </summary>
         </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.Index">
             <summary>
             INdex
@@ -42,6 +47,11 @@
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.CreateFollowRequestAsync(Dislinkt.Connections.ConnectionData)">
             <summary>
             Creates a follow request for private profiles.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowRequestsAsync(System.Guid)">
+            <summary>
+            Gets all follow requests for given ID.
             </summary>
         </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.ApproveFollowAsync(Dislinkt.Connections.ConnectionData)">

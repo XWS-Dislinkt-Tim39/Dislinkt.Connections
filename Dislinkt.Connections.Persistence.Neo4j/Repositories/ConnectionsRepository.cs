@@ -41,11 +41,21 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Repositories
         public async Task CreateConnectionAsync(Guid sourceId, Guid targetId, string connectionName)
         {
             await _queryExecutor.CreateConnectionAsync(sourceId, targetId, connectionName);
+            await _queryExecutor.CreateConnectionAsync(targetId, sourceId, connectionName);
+        }
+        public async Task CreateConnectionRequestAsync(Guid sourceId, Guid targetId, string connectionName)
+        {
+            await _queryExecutor.CreateConnectionAsync(sourceId, targetId, connectionName);
+        }
+        public async Task RemoveConnectionRequestAsync(Guid sourceId, Guid targetId, string connectionName)
+        {
+            await _queryExecutor.RemoveConnectionAsync(sourceId, targetId, connectionName);
         }
 
         public async Task RemoveConnectionAsync(Guid sourceId, Guid targetId, string connectionName)
         {
             await _queryExecutor.RemoveConnectionAsync(sourceId, targetId, connectionName);
+            await _queryExecutor.RemoveConnectionAsync(targetId, sourceId, connectionName);
         }
 
         public async Task<IReadOnlyList<Guid>> GetConnected(Guid sourceId, string connectionType)
