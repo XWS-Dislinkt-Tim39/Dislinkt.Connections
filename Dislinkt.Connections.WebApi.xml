@@ -44,6 +44,11 @@
             Follows a user.
             </summary>
         </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.UnfollowAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Unfollows a user.
+            </summary>
+        </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.CreateFollowRequestAsync(Dislinkt.Connections.ConnectionData)">
             <summary>
             Creates a follow request for private profiles.
