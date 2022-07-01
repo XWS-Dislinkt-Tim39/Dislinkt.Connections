@@ -9,9 +9,9 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Factory
     {
         public IDriver Create()
         {
-            var uri = "neo4j+s://803184a8.databases.neo4j.io";
+            var uri = "bolt://localhost:7687";
             var user = "neo4j";
-            var password = "SiwDvvkzyx3TXwBnLCJd7-cilalOTAzMWOszLjoccxg";
+            var password = "dislinkt";
             return GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
         }
     }
