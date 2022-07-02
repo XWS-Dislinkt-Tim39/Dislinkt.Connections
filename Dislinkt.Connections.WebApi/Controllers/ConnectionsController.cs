@@ -14,6 +14,7 @@ using Dislinkt.Connections.Application.RemoveConnection.Commands;
 using Dislinkt.Connections.Application.Unfollow.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dislinkt.Connections.WebApi.Controllers
@@ -82,6 +83,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Given a UserID, returns the list of followed private users.
         /// </summary>
         [HttpGet]
+        [Authorize]
         [Route("/getFollowing")]
         public async Task<IReadOnlyList<Guid>> GetFollowingAsync(Guid sourceId)
         {
@@ -92,6 +94,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Follows a user.
         /// </summary>
         [HttpPost]
+        [Authorize]
         [Route("/follow")]
         public async Task<bool> FollowAsync(ConnectionData connectionData)
         {
@@ -102,6 +105,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Unfollows a user.
         /// </summary>
         [HttpPost]
+        [Authorize]
         [Route("/unfollow")]
         public async Task<bool> UnfollowAsync(ConnectionData connectionData)
         {
@@ -112,6 +116,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Creates a follow request for private profiles.
         /// </summary>
         [HttpPost]
+        [Authorize]
         [Route("/createFollowRequest")]
         public async Task<bool> CreateFollowRequestAsync(ConnectionData connectionData)
         {
@@ -123,6 +128,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Gets all follow requests for given ID.
         /// </summary>
         [HttpGet]
+        [Authorize]
         [Route("/getFollowRequests")]
         public async Task<IReadOnlyList<Guid>> GetFollowRequestsAsync(Guid sourceId)
         {
@@ -133,6 +139,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Approves a follow request.
         /// </summary>
         [HttpPost]
+        [Authorize]
         [Route("/approveFollow")]
         public async Task<bool> ApproveFollowAsync(ConnectionData connectionData)
         {

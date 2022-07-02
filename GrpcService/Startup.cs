@@ -18,15 +18,29 @@ using Dislinkt.Connections.Persistence.Neo4j.Repositories;
 using MediatR;
 using IQueryExecutor = Dislinkt.Connections.Persistence.MongoDB.Common.IQueryExecutor;
 using QueryExecutor = Dislinkt.Connections.Persistence.MongoDB.Common.QueryExecutor;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GrpcService
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        /// <summary>
+        /// Configurtion parameter
+        /// </summary>
+        public IConfiguration Configuration { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+           
             services.AddGrpc();
             services.AddMediatR(typeof(RegisterUserCommand).GetTypeInfo().Assembly);
             // Dislinkt.Connections.Persistence.MongoDB
@@ -38,11 +52,13 @@ namespace GrpcService
             services.AddScoped<MongoDbContext>();
             services.AddScoped<Neo4jDbContext>();
 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -27,6 +27,8 @@ using MediatR;
 using Newtonsoft.Json.Serialization;
 using IQueryExecutor = Dislinkt.Connections.Persistence.MongoDB.Common.IQueryExecutor;
 using QueryExecutor = Dislinkt.Connections.Persistence.MongoDB.Common.QueryExecutor;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Dislinkt.Connections.WebApi
 {
@@ -54,6 +56,20 @@ namespace Dislinkt.Connections.WebApi
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
+            var audienceConfig = Configuration.GetSection("Audience");
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(audienceConfig["Secret"]));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+                ValidateIssuer = true,
+                ValidIssuer = audienceConfig["Iss"],
+                ValidateAudience = true,
+                ValidAudience = audienceConfig["Aud"],
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+                RequireExpirationTime = true,
+            };
             services.AddMvc();
             services.AddCors(options =>
             {
@@ -83,7 +99,15 @@ namespace Dislinkt.Connections.WebApi
                 c.IncludeXmlComments(xmlPath);
 
             });
-
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = "Auth_key";
+            })
+       .AddJwtBearer("Auth_key", x =>
+       {
+           x.RequireHttpsMetadata = false;
+           x.TokenValidationParameters = tokenValidationParameters;
+       });
             services.Configure<MongoSettings>(options =>
             {
                 options.Connection = Configuration.GetSection("MongoSettings:ConnectionString").Value;
@@ -129,8 +153,8 @@ namespace Dislinkt.Connections.WebApi
             });
 
 
+            app.UseAuthentication();
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
