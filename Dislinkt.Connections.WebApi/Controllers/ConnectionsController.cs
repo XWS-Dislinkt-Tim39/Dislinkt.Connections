@@ -147,6 +147,9 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new ApproveFollowCommand(connectionData));
         }
 
+        /// <summary>
+        /// Blocks a user and automatically removes all relationships between them.
+        /// </summary>
         [HttpPost]
         [Authorize]
         [Route("/block")]
