@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using Dislinkt.Connections.Application.ApproveFollow.Commands;
+using Dislinkt.Connections.Application.Block.Commands;
 using Dislinkt.Connections.Application.CreateConnection.Commands;
 using Dislinkt.Connections.Application.CreateFollowRequest.Commands;
 using Dislinkt.Connections.Application.Follow.Commands;
@@ -146,7 +147,13 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new ApproveFollowCommand(connectionData));
         }
 
-
+        [HttpPost]
+        [Authorize]
+        [Route("/block")]
+        public async Task<bool> BlockAsync(ConnectionData connectionData)
+        {
+            return await _mediator.Send(new BlockCommand(connectionData));
+        }
 
     }
 }

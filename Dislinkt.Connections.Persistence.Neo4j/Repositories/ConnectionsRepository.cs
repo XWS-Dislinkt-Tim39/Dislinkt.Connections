@@ -63,9 +63,10 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Repositories
             return await _queryExecutor.GetConnectedAsync(sourceId, connectionType);
         }
 
-        public async Task BlockUserAsync(User blockingUser, User blockedUser)
+        public async Task BlockUserAsync(Guid sourceId, Guid targetId)
         {
-
+            await _queryExecutor.RemoveAllConnectionsAsync(sourceId, targetId);
+            await _queryExecutor.CreateConnectionAsync(sourceId, targetId, "BLOCKS");
         }
 
         public async Task AddMessageRequestAsync(User baseUser, User receivingUser)

@@ -15,6 +15,7 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
         Task CreateConnectionAsync(Guid sourceId, Guid targetId, string connectionName);
         Task RemoveConnectionAsync(Guid sourceId, Guid targetId, string connectionName);
         Task<IReadOnlyList<Guid>> GetConnectedAsync(Guid sourceId, string connectionType);
+        Task RemoveAllConnectionsAsync(Guid sourceId, Guid targetId);
 
     }
 }

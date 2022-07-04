@@ -159,5 +159,23 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
 
         }
 
+        public async Task RemoveAllConnectionsAsync(Guid sourceId, Guid targetId)
+        {
+            var query = $"MATCH (n) - [r] - (m) " +
+                $"WHERE n.Id = \"{sourceId}\" AND m.Id = \"{targetId}\"" +
+                $"DELETE r";
+
+            IAsyncSession session = _databaseFactory.Create().AsyncSession();
+            try
+            {
+                await session.RunAsync(query);
+            }
+            catch (Neo4jException ex)
+            {
+                Trace.WriteLine($"{query} - {ex}");
+                throw;
+            }
+        }
+
     }
 }
