@@ -12,6 +12,7 @@ using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
 using Dislinkt.Connections.Application.GetFollowRequests.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
 using Dislinkt.Connections.Application.RemoveConnection.Commands;
+using Dislinkt.Connections.Application.Unblock.Commands;
 using Dislinkt.Connections.Application.Unfollow.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
 using MediatR;
@@ -147,6 +148,17 @@ namespace Dislinkt.Connections.WebApi.Controllers
         public async Task<bool> BlockAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new BlockCommand(connectionData));
+        }
+
+        /// <summary>
+        /// Unblocks a user. Does not restore previous relationships between them.
+        /// </summary>
+        [HttpPost]
+        [Authorize]
+        [Route("/unblock")]
+        public async Task<bool> UnblockBlockAsync(ConnectionData connectionData)
+        {
+            return await _mediator.Send(new UnblockCommand(connectionData));
         }
 
         /// <summary>
