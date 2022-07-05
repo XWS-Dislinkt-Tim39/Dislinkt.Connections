@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Dislinkt.Connections.Application.ApproveFollow.Commands;
 using Dislinkt.Connections.Application.Block.Commands;
-using Dislinkt.Connections.Application.CreateConnection.Commands;
 using Dislinkt.Connections.Application.CreateFollowRequest.Commands;
 using Dislinkt.Connections.Application.Follow.Commands;
 using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
@@ -60,15 +59,6 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new RegisterUserCommand(userData));
         }
 
-        /// <summary>
-        /// Creates a relationship between 2 users. (e.g. a-[:FOLLOWS]->b)
-        /// </summary>
-        [HttpPost]
-        [Route("/createConnection")]
-        public async Task<bool> CreateConnectionAsync(ConnectionData connectionData)
-        {
-            return await _mediator.Send(new CreateConnectionCommand(connectionData));
-        }
 
         /// <summary>
         /// Removes a relationship between 2 users.
@@ -156,6 +146,17 @@ namespace Dislinkt.Connections.WebApi.Controllers
         public async Task<bool> BlockAsync(ConnectionData connectionData)
         {
             return await _mediator.Send(new BlockCommand(connectionData));
+        }
+
+        /// <summary>
+        /// Gets all blocked users for a given ID.
+        /// </summary>
+        [HttpGet]
+        [Authorize]
+        [Route("/getBlocked")]
+        public async Task<bool> GetBlockedAsync(Guid sourceId)
+        {
+            return false;
         }
 
     }

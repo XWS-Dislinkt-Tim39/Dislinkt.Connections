@@ -22,7 +22,7 @@ namespace Dislinkt.Connections.Application.Block.Commands
             {
                 Guid sourceId = Guid.Parse(request.Request.SourceId);
                 Guid targetId = Guid.Parse(request.Request.TargetId);
-                await _connectionsRepository.BlockUserAsync(sourceId, targetId);
+                await _connectionsRepository.CreateConnectionAsync(sourceId, targetId, "BLOCKS");
             }
             catch (Exception e)
             {

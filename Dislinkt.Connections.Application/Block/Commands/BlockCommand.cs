@@ -9,7 +9,7 @@ namespace Dislinkt.Connections.Application.Block.Commands
     {
         public BlockCommand(ConnectionData connectionData)
         {
-            Request = connectionData
+            Request = connectionData;
         }
         public ConnectionData Request { get; set; }
     }
