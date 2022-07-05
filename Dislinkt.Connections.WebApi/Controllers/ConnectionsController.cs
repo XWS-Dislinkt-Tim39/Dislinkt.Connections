@@ -7,6 +7,7 @@ using Dislinkt.Connections.Application.ApproveFollow.Commands;
 using Dislinkt.Connections.Application.Block.Commands;
 using Dislinkt.Connections.Application.CreateFollowRequest.Commands;
 using Dislinkt.Connections.Application.Follow.Commands;
+using Dislinkt.Connections.Application.GetBlocked.Commands;
 using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
 using Dislinkt.Connections.Application.GetFollowRequests.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
@@ -154,9 +155,9 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [HttpGet]
         [Authorize]
         [Route("/getBlocked")]
-        public async Task<bool> GetBlockedAsync(Guid sourceId)
+        public async Task<IReadOnlyList<Guid>> GetBlockedAsync(Guid sourceId)
         {
-            return false;
+            return await _mediator.Send(new GetBlockedCommand(sourceId));
         }
 
     }
