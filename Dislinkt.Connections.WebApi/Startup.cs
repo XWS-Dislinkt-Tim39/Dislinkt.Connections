@@ -29,6 +29,7 @@ using IQueryExecutor = Dislinkt.Connections.Persistence.MongoDB.Common.IQueryExe
 using QueryExecutor = Dislinkt.Connections.Persistence.MongoDB.Common.QueryExecutor;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Prometheus;
 
 namespace Dislinkt.Connections.WebApi
 {
@@ -155,11 +156,13 @@ namespace Dislinkt.Connections.WebApi
 
             app.UseAuthentication();
             app.UseRouting();
+            app.UseHttpMetrics();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapMetrics();
             });
         }
     }
