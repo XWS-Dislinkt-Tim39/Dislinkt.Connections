@@ -76,7 +76,6 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Given a UserID, returns the list of followed private users.
         /// </summary>
         [HttpGet]
-        [Authorize]
         [Route("/getFollowing")]
         public async Task<IReadOnlyList<Guid>> GetFollowingAsync(Guid sourceId)
         {
@@ -143,7 +142,6 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Blocks a user and automatically removes all relationships between them.
         /// </summary>
         [HttpPost]
-        [Authorize]
         [Route("/block")]
         public async Task<bool> BlockAsync(ConnectionData connectionData)
         {
@@ -165,7 +163,6 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Gets all blocked users for a given ID.
         /// </summary>
         [HttpGet]
-        [Authorize]
         [Route("/getBlocked")]
         public async Task<IReadOnlyList<Guid>> GetBlockedAsync(Guid sourceId)
         {
