@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dislinkt.Connections.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Dislinkt.Connections.WebApi.Controllers.ConnectionsController">
+            <summary>
+            Main controller
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.Index">
+            <summary>
+            INdex
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RegisterUserAsync(Dislinkt.Connections.UserData)">
+            <summary>
+            Creates a new node in graph database.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RemoveConnectionAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Removes a relationship between 2 users.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowingAsync(System.Guid)">
+            <summary>
+            Given a UserID, returns the list of followed private users.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.FollowAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Follows a user.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.UnfollowAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Unfollows a user.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.CreateFollowRequestAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Creates a follow request for private profiles.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowRequestsAsync(System.Guid)">
+            <summary>
+            Gets all follow requests for given ID.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.ApproveFollowAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Approves a follow request.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.BlockAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Blocks a user and automatically removes all relationships between them.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.UnblockBlockAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Unblocks a user. Does not restore previous relationships between them.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetBlockedAsync(System.Guid)">
+            <summary>
+            Gets all blocked users for a given ID.
+            </summary>
+        </member>
+        <member name="T:Dislinkt.Connections.WebApi.Program">
+            <summary>
+            Program init
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Program.Main(System.String[])">
+            <summary>
+            Program init Main
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Program init CreateHostBuilder
+            </summary>
+        </member>
+        <member name="T:Dislinkt.Connections.WebApi.Startup">
+            <summary>
+            Program and service configurations
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configuration DI
+            </summary>
+        </member>
+        <member name="P:Dislinkt.Connections.WebApi.Startup.Configuration">
+            <summary>
+            Configuration field
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+        </member>
+    </members>
+</doc>
