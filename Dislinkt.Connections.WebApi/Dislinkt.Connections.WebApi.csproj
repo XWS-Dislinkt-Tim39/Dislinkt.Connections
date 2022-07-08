@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>C:\Users\DELL\Desktop\Connections\Dislinkt.Connections\Dislinkt.Connections.WebApi\Dislinkt.Connections.WebApi.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\Natalija\OneDrive\Desktop\Dislinkt\Dislinkt.Connections\Dislinkt.Connections.WebApi.xml</DocumentationFile>
     <UserSecretsId>cce0f9bd-77f5-41ba-a35b-d36cbc266b84</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <BaseOutputPath>C:\Users\Natalija\OneDrive\Documents\Dislinkt\Dislinkt.Connections\Dislinkt.Connections.Application</BaseOutputPath>

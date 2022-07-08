@@ -23,6 +23,8 @@ namespace Dislinkt.Connections.Application.Block.Commands
                 Guid sourceId = Guid.Parse(request.Request.SourceId);
                 Guid targetId = Guid.Parse(request.Request.TargetId);
                 await _connectionsRepository.CreateConnectionAsync(sourceId, targetId, "BLOCKS");
+                await _connectionsRepository.RemoveConnectionAsync(sourceId, targetId, "FOLLOWS");
+                await _connectionsRepository.RemoveConnectionAsync(targetId, sourceId, "FOLLOWS");
             }
             catch (Exception e)
             {

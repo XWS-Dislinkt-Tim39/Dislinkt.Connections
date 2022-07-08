@@ -24,11 +24,6 @@
             Creates a new node in graph database.
             </summary>
         </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.CreateConnectionAsync(Dislinkt.Connections.ConnectionData)">
-            <summary>
-            Creates a relationship between 2 users. (e.g. a-[:FOLLOWS]->b)
-            </summary>
-        </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RemoveConnectionAsync(Dislinkt.Connections.ConnectionData)">
             <summary>
             Removes a relationship between 2 users.
@@ -62,6 +57,21 @@
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.ApproveFollowAsync(Dislinkt.Connections.ConnectionData)">
             <summary>
             Approves a follow request.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.BlockAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Blocks a user and automatically removes all relationships between them.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.UnblockBlockAsync(Dislinkt.Connections.ConnectionData)">
+            <summary>
+            Unblocks a user. Does not restore previous relationships between them.
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetBlockedAsync(System.Guid)">
+            <summary>
+            Gets all blocked users for a given ID.
             </summary>
         </member>
         <member name="T:Dislinkt.Connections.WebApi.Program">
