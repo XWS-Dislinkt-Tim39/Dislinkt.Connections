@@ -15,6 +15,7 @@ namespace Dislinkt.Connections.Core.Repositories
         Task<IReadOnlyList<Guid>> GetConnected(Guid sourceId, string connectionType);
         Task AddMessageRequestAsync(User baseUser, User receivingUser);
         Task<bool> IsFollowingAsync(User baseUser, User followedUser);
+        Task<IReadOnlyList<Guid>> GetConnectedReverse(Guid sourceId, string connectionType);
 
     }
 }

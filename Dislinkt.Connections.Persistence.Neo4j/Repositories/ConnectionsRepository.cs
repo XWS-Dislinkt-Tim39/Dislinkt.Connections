@@ -64,5 +64,10 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Repositories
 
             return false;
         }
+
+        public async Task<IReadOnlyList<Guid>> GetConnectedReverse(Guid sourceId, string connectionType)
+        {
+            return await _queryExecutor.GetConnectedReverseAsync(sourceId, connectionType);
+        }
     }
 }
