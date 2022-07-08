@@ -177,5 +177,31 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
             }
         }
 
+        public async Task<IReadOnlyList<Guid>> GetConnectedReverseAsync(Guid sourceId, string connectionType)
+        {
+            var query = $"MATCH (n)-[:{connectionType}]->(m) " +
+                        $"WHERE m.Id = \"{sourceId}\" " +
+                        "RETURN n.Id as Id";
+            IAsyncSession session = _databaseFactory.Create().AsyncSession();
+            try
+            {
+                List<IRecord> readResult = await session.ReadTransactionAsync(async tx =>
+                {
+                    IResultCursor result = await tx.RunAsync(query);
+                    return await result.ToListAsync();
+                }
+                );
+
+                return readResult.Count == 0
+                    ? null
+                    : readResult.Select(record => Guid.Parse(record["Id"].ToString() ?? string.Empty)).ToList();
+            }
+            catch (Neo4jException ex)
+            {
+                Trace.WriteLine($"{query} - {ex}");
+                throw;
+            }
+        }
+
     }
 }

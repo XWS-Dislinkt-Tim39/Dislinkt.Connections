@@ -37,7 +37,11 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
 
         public async Task<IReadOnlyList<Guid>> GetConnectedAsync(Guid sourceId, string connectionType)
             => await _neo4jDbContext.GetConnected(sourceId, connectionType);
+
         public async Task RemoveAllConnectionsAsync(Guid sourceId, Guid targetId)
             => await _neo4jDbContext.RemoveAllConnectionsAsync(sourceId, targetId);
+
+        public async Task<IReadOnlyList<Guid>> GetConnectedReverseAsync(Guid sourceId, string connectionType)
+            => await _neo4jDbContext.GetConnectedReverseAsync(sourceId, connectionType);
     }
 }
