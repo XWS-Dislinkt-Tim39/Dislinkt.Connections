@@ -10,6 +10,7 @@ using Dislinkt.Connections.Application.Follow.Commands;
 using Dislinkt.Connections.Application.GetBlocked.Commands;
 using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
 using Dislinkt.Connections.Application.GetFollowRequests.Commands;
+using Dislinkt.Connections.Application.GetWhoBlocksMe.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
 using Dislinkt.Connections.Application.RemoveConnection.Commands;
 using Dislinkt.Connections.Application.Unblock.Commands;
@@ -169,5 +170,14 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return await _mediator.Send(new GetBlockedCommand(sourceId));
         }
 
+        /// <summary>
+        /// Gets the users that block the user with given ID.
+        /// </summary>
+        [HttpGet]
+        [Route("/getWhoBlocksMe")]
+        public async Task<IReadOnlyList<Guid>> GetWhoBlocksMe(Guid sourceId)
+        {
+            return await _mediator.Send(new GetWhoBlocksMeCommand(sourceId));
+        }
     }
 }
