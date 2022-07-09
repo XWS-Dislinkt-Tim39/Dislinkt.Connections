@@ -54,32 +54,12 @@ namespace Dislinkt.Connections.WebApi.Controllers
             return "hello";
         }
 
-        /// <summary>
-        /// Creates a new node in graph database.
-        /// </summary>
-
-        [HttpPost]
-        [Route("/registerUser")]
-        public async Task<bool> RegisterUserAsync(UserData userData)
-        {
-            return await _mediator.Send(new RegisterUserCommand(userData));
-        }
-
-
-        /// <summary>
-        /// Removes a relationship between 2 users.
-        /// </summary>
-        [HttpPost]
-        [Route("/removeConnection")]
-        public async Task<bool> RemoveConnectionAsync(ConnectionData connectionData)
-        {
-            return await _mediator.Send(new RemoveConnectionCommand(connectionData));
-        }
 
         /// <summary>
         /// Given a UserID, returns the list of followed private users.
         /// </summary>
         [HttpGet]
+        [Authorize]
         [Route("/getFollowing")]
         public async Task<IReadOnlyList<Guid>> GetFollowingAsync(Guid sourceId)
         {
@@ -160,6 +140,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Blocks a user and automatically removes all relationships between them.
         /// </summary>
         [HttpPost]
+        [Authorize]
         [Route("/block")]
         public async Task<bool> BlockAsync(ConnectionData connectionData)
         {
@@ -200,7 +181,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         [Route("/getFollowRecommendations")]
         public async Task<IReadOnlyList<Guid>> GetFollowRecommendations(Guid sourceId)
         {

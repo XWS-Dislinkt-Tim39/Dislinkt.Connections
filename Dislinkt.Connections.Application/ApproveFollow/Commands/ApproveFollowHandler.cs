@@ -26,6 +26,7 @@ namespace Dislinkt.Connections.Application.ApproveFollow.Commands
                 Guid targetId = Guid.Parse(request.Request.TargetId);
                 await _connectionsRepository.RemoveConnectionAsync(targetId, sourceId, "FOLLOW_REQUEST");
                 await _connectionsRepository.CreateConnectionAsync(sourceId, targetId, "FOLLOWS");
+                await _connectionsRepository.CreateConnectionAsync(targetId, sourceId, "FOLLOWS");
             }
             catch (Exception ex)
             {

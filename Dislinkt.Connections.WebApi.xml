@@ -19,16 +19,6 @@
             INdex
             </summary>
         </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RegisterUserAsync(Dislinkt.Connections.UserData)">
-            <summary>
-            Creates a new node in graph database.
-            </summary>
-        </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RemoveConnectionAsync(Dislinkt.Connections.ConnectionData)">
-            <summary>
-            Removes a relationship between 2 users.
-            </summary>
-        </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowingAsync(System.Guid)">
             <summary>
             Given a UserID, returns the list of followed private users.
