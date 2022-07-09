@@ -9,6 +9,7 @@ using Dislinkt.Connections.Application.CreateFollowRequest.Commands;
 using Dislinkt.Connections.Application.Follow.Commands;
 using Dislinkt.Connections.Application.GetBlocked.Commands;
 using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
+using Dislinkt.Connections.Application.GetFollowRecommendations.Commands;
 using Dislinkt.Connections.Application.GetFollowRequests.Commands;
 using Dislinkt.Connections.Application.GetWhoBlocksMe.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
@@ -180,6 +181,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Gets all blocked users for a given ID.
         /// </summary>
         [HttpGet]
+        [Authorize]
         [Route("/getBlocked")]
         public async Task<IReadOnlyList<Guid>> GetBlockedAsync(Guid sourceId)
         {
@@ -190,10 +192,21 @@ namespace Dislinkt.Connections.WebApi.Controllers
         /// Gets the users that block the user with given ID.
         /// </summary>
         [HttpGet]
+        [Authorize]
         [Route("/getWhoBlocksMe")]
         public async Task<IReadOnlyList<Guid>> GetWhoBlocksMe(Guid sourceId)
         {
             return await _mediator.Send(new GetWhoBlocksMeCommand(sourceId));
         }
+
+        [HttpGet]
+        //[Authorize]
+        [Route("/getFollowRecommendations")]
+        public async Task<IReadOnlyList<Guid>> GetFollowRecommendations(Guid sourceId)
+        {
+            return await _mediator.Send(new GetFollowRecommendationsCommand(sourceId));
+        }
+
+
     }
 }

@@ -16,6 +16,7 @@ namespace Dislinkt.Connections.Core.Repositories
         Task AddMessageRequestAsync(User baseUser, User receivingUser);
         Task<bool> IsFollowingAsync(User baseUser, User followedUser);
         Task<IReadOnlyList<Guid>> GetConnectedReverse(Guid sourceId, string connectionType);
+        Task<IReadOnlyList<Guid>> GetSecondLevelConnectedAsync(Guid sourceId);
 
     }
 }
