@@ -1,0 +1,21 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcAddActivityService";
+
+package addNewActivity;
+
+service addActivityGreeter{
+	rpc addActivity (ActivityRequest) returns (ActivityReply);
+}
+
+message ActivityRequest{
+	string UserId=1;
+	string Text=2;
+	string Type=3;
+	string Date=4;
+}
+
+message ActivityReply{
+	bool successful=1;
+	string message=2;
+}

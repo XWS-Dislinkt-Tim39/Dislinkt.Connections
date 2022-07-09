@@ -14,6 +14,9 @@
     <None Remove="Protos\addNotification.proto" />
   </ItemGroup> 
   <ItemGroup>
+    <None Remove="Protos\addActivity.proto" />
+  </ItemGroup> 
+  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.21.2" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
     <PackageReference Include="Grpc.Core.Api" Version="2.46.1" />
@@ -42,10 +45,10 @@
   </ItemGroup>
     <ItemGroup>  
   <Protobuf Include="Protos\addNotification.proto" GrpcServices="Client" />  
-  </ItemGroup> 
-     <ItemGroup>  
-  <Protobuf Include="Protos\addActivity.proto" GrpcServices="Client" />  
-  </ItemGroup> 
+  </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Protos\" />
+    </ItemGroup> 
 
 
 </Project>

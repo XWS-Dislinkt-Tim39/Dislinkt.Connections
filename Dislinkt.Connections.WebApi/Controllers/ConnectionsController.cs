@@ -18,6 +18,7 @@ using Dislinkt.Connections.Application.Unblock.Commands;
 using Dislinkt.Connections.Application.Unfollow.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
 using Grpc.Net.Client;
+using GrpcAddActivityService;
 using GrpcAddNotificationService;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -74,6 +75,19 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/follow")]
         public async Task<bool> FollowAsync(ConnectionData connectionData)
         {
+
+            var channel = GrpcChannel.ForAddress("https://localhost:5003/");
+            var client = new addActivityGreeter.addActivityGreeterClient(channel);
+            var reply= client.addActivity(new ActivityRequest { UserId = connectionData.SourceId, Text ="Create connection", Type = "Connection", Date = DateTime.Now.AddHours(2).ToString() });
+
+            if (!reply.Successful)
+            {
+                Debug.WriteLine("Doslo je do greske prilikom kreiranja notifikacija za usera");
+                return false;
+            }
+
+            Debug.WriteLine("Uspesno prosledjen na registraciju u notifikacijama -- " + reply.Message);
+
             return await _mediator.Send(new FollowCommand(connectionData));
         }
 
@@ -100,7 +114,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
 
             var channel = GrpcChannel.ForAddress("https://localhost:5002/");
             var client = new addNotificationGreeter.addNotificationGreeterClient(channel);
-             var reply = client.addNotification(new NotificationRequest { UserId = connectionData.SourceId, From = connectionData.TargetId, Type = "FriendRequest", Seen = false });
+            var reply = client.addNotification(new NotificationRequest { UserId = connectionData.SourceId, From = connectionData.TargetId, Type = "FriendRequest", Seen = false });
 
                 if (!reply.Successful)
                 {
@@ -109,6 +123,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
                 }
 
                 Debug.WriteLine("Uspesno prosledjen na registraciju u notifikacijama -- " + reply.Message);
+
+           
             return true;
 
         }
