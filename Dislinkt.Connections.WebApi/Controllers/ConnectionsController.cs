@@ -16,6 +16,8 @@ using Dislinkt.Connections.Application.RemoveConnection.Commands;
 using Dislinkt.Connections.Application.Unblock.Commands;
 using Dislinkt.Connections.Application.Unfollow.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
+using Grpc.Net.Client;
+using GrpcAddNotificationService;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -113,7 +115,21 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/createFollowRequest")]
         public async Task<bool> CreateFollowRequestAsync(ConnectionData connectionData)
         {
-            return await _mediator.Send(new CreateFollowRequestCommand(connectionData));
+            await _mediator.Send(new CreateFollowRequestCommand(connectionData));
+
+            var channel = GrpcChannel.ForAddress("https://localhost:5002/");
+            var client = new addNotificationGreeter.addNotificationGreeterClient(channel);
+             var reply = client.addNotification(new NotificationRequest { UserId = connectionData.SourceId, From = connectionData.TargetId, Type = "FriendRequest", Seen = false });
+
+                if (!reply.Successful)
+                {
+                    Debug.WriteLine("Doslo je do greske prilikom kreiranja notifikacija za usera");
+                    return false;
+                }
+
+                Debug.WriteLine("Uspesno prosledjen na registraciju u notifikacijama -- " + reply.Message);
+            return true;
+
         }
 
 
