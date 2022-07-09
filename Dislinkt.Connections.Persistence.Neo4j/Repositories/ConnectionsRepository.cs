@@ -69,5 +69,10 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Repositories
         {
             return await _queryExecutor.GetConnectedReverseAsync(sourceId, connectionType);
         }
+
+        public async Task<IReadOnlyList<Guid>> GetSecondLevelConnectedAsync(Guid sourceId)
+        {
+            return await _queryExecutor.GetSecondLevelConnectedAsync(sourceId);
+        }
     }
 }
