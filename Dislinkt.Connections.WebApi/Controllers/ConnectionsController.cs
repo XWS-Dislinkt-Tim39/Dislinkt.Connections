@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dislinkt.Connections.Application.ApproveFollow.Commands;
 using Dislinkt.Connections.Application.Block.Commands;
 using Dislinkt.Connections.Application.CreateFollowRequest.Commands;
+using Dislinkt.Connections.Application.Deleteuser.Commands;
 using Dislinkt.Connections.Application.Follow.Commands;
 using Dislinkt.Connections.Application.GetBlocked.Commands;
 using Dislinkt.Connections.Application.GetFollowingPrivate.Commands;
@@ -195,7 +196,9 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             return await _mediator.Send(new GetWhoBlocksMeCommand(sourceId));
         }
-
+        /// <summary>
+        /// Gets the recommendations
+        /// </summary>
         [HttpGet]
         [Authorize]
         [Route("/getFollowRecommendations")]
@@ -203,6 +206,17 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             return await _mediator.Send(new GetFollowRecommendationsCommand(sourceId));
         }
+        /// <summary>
+        /// Delete user
+        /// </summary>
+        [HttpDelete]
+        [Route("/deleteUser")]
+        public async Task<bool> DeleteUserById(Guid sourceId)
+        {
+            return await _mediator.Send(new DeleteUserCommand(sourceId));
+        }
+
+
 
 
     }

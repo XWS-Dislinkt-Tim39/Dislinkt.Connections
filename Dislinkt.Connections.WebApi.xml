@@ -69,6 +69,16 @@
             Gets the users that block the user with given ID.
             </summary>
         </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowRecommendations(System.Guid)">
+            <summary>
+            Gets the recommendations
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.DeleteUserById(System.Guid)">
+            <summary>
+            Delete user
+            </summary>
+        </member>
         <member name="T:Dislinkt.Connections.WebApi.Program">
             <summary>
             Program init

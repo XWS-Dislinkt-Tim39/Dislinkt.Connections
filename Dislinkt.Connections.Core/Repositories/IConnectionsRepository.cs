@@ -9,6 +9,8 @@ namespace Dislinkt.Connections.Core.Repositories
     public interface IConnectionsRepository
     {
         Task<User> FindUserByIdAsync(Guid id);
+
+        Task DeleteById(Guid id);
         Task CreateUser(User user);
         Task CreateConnectionAsync(Guid sourceId, Guid targetId, string connectionName);
         Task RemoveConnectionAsync(Guid sourceId, Guid targetId, string connectionName);

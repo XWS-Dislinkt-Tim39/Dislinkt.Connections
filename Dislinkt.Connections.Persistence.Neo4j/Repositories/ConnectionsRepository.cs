@@ -48,6 +48,12 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Repositories
             await _queryExecutor.RemoveConnectionAsync(sourceId, targetId, connectionName);
         }
 
+
+        public async Task DeleteById(Guid id)
+        {
+             await _queryExecutor.DeleteByIdAsync<UserEntity>(id);
+        }
+
         public async Task<IReadOnlyList<Guid>> GetConnected(Guid sourceId, string connectionType)
         {
             return await _queryExecutor.GetConnectedAsync(sourceId, connectionType);
