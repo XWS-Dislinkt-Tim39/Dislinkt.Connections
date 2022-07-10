@@ -78,7 +78,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
 
             var channel = GrpcChannel.ForAddress("https://localhost:5003/");
             var client = new addActivityGreeter.addActivityGreeterClient(channel);
-            var reply= client.addActivity(new ActivityRequest { UserId = connectionData.SourceId, Text ="Create connection", Type = "Connection", Date = DateTime.Now.AddHours(2).ToString() });
+            var reply= client.addActivity(new ActivityRequest { UserId = connectionData.SourceId, Text ="Create connection", Type = "Connection", Date = DateTime.Now.ToString() });
 
             if (!reply.Successful)
             {
