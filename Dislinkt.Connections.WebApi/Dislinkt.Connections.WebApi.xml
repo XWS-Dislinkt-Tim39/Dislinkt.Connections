@@ -19,6 +19,16 @@
             INdex
             </summary>
         </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RegisterUserAsync(Dislinkt.Connections.UserData)">
+            <summary>
+            Register user,create node
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.DeleteUser(System.Guid)">
+            <summary>
+            Register user,create node
+            </summary>
+        </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowingAsync(System.Guid)">
             <summary>
             Given a UserID, returns the list of followed private users.
