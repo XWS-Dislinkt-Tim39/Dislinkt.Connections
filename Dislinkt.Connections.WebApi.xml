@@ -19,6 +19,16 @@
             INdex
             </summary>
         </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RegisterUserAsync(Dislinkt.Connections.UserData)">
+            <summary>
+            Register user,create node
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.DeleteUser(System.Guid)">
+            <summary>
+            Register user,create node
+            </summary>
+        </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowingAsync(System.Guid)">
             <summary>
             Given a UserID, returns the list of followed private users.
@@ -67,16 +77,6 @@
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetWhoBlocksMe(System.Guid)">
             <summary>
             Gets the users that block the user with given ID.
-            </summary>
-        </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowRecommendations(System.Guid)">
-            <summary>
-            Gets the recommendations
-            </summary>
-        </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.DeleteUserById(System.Guid)">
-            <summary>
-            Delete user
             </summary>
         </member>
         <member name="T:Dislinkt.Connections.WebApi.Program">

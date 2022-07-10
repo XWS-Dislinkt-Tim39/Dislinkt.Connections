@@ -55,7 +55,24 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             return "hello";
         }
-
+        /// <summary>
+        /// Register user,create node
+        /// </summary>
+        [HttpPost]
+        [Route("/registerUser")]
+        public async Task<bool> RegisterUserAsync(UserData userData)
+        {
+            return await _mediator.Send(new RegisterUserCommand(userData));
+        }
+        /// <summary>
+        /// Register user,create node
+        /// </summary>
+        [HttpDelete]
+        [Route("/deleteUser/{id}")]
+        public async Task<bool> DeleteUser(Guid id)
+        {
+            return await _mediator.Send(new DeleteUserCommand(id));
+        }
 
         /// <summary>
         /// Given a UserID, returns the list of followed private users.
@@ -196,9 +213,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             return await _mediator.Send(new GetWhoBlocksMeCommand(sourceId));
         }
-        /// <summary>
-        /// Gets the recommendations
-        /// </summary>
+
         [HttpGet]
         [Authorize]
         [Route("/getFollowRecommendations")]
@@ -206,17 +221,6 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             return await _mediator.Send(new GetFollowRecommendationsCommand(sourceId));
         }
-        /// <summary>
-        /// Delete user
-        /// </summary>
-        [HttpDelete]
-        [Route("/deleteUser")]
-        public async Task<bool> DeleteUserById(Guid sourceId)
-        {
-            return await _mediator.Send(new DeleteUserCommand(sourceId));
-        }
-
-
 
 
     }
