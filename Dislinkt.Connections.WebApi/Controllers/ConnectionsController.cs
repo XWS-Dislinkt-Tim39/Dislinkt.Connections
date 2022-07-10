@@ -23,6 +23,7 @@ using GrpcAddNotificationService;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OpenTracing;
 
 namespace Dislinkt.Connections.WebApi.Controllers
 {
@@ -36,13 +37,14 @@ namespace Dislinkt.Connections.WebApi.Controllers
     public class ConnectionsController : Controller
     {
         private readonly IMediator _mediator;
-
+        private readonly ITracer _tracer;
         /// <summary>
         /// Constructor.
         /// </summary>
-        public ConnectionsController(IMediator mediator)
+        public ConnectionsController(IMediator mediator, ITracer tracer)
         {
             _mediator = mediator;
+            _tracer = tracer;
         }
 
         /// <summary>
@@ -75,7 +77,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/follow")]
         public async Task<bool> FollowAsync(ConnectionData connectionData)
         {
-
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             var channel = GrpcChannel.ForAddress("https://localhost:5003/");
             var client = new addActivityGreeter.addActivityGreeterClient(channel);
             var reply= client.addActivity(new ActivityRequest { UserId = connectionData.SourceId, Text ="Create connection", Type = "Connection", Date = DateTime.Now.ToString() });
@@ -99,6 +102,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/unfollow")]
         public async Task<bool> UnfollowAsync(ConnectionData connectionData)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new UnfollowCommand(connectionData));
         }
 
@@ -110,6 +115,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/createFollowRequest")]
         public async Task<bool> CreateFollowRequestAsync(ConnectionData connectionData)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             await _mediator.Send(new CreateFollowRequestCommand(connectionData));
 
             var channel = GrpcChannel.ForAddress("https://localhost:5002/");
@@ -138,6 +145,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/getFollowRequests")]
         public async Task<IReadOnlyList<Guid>> GetFollowRequestsAsync(Guid sourceId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new GetFollowRequestsCommand(sourceId));
         }
 
@@ -149,6 +158,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/approveFollow")]
         public async Task<bool> ApproveFollowAsync(ConnectionData connectionData)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new ApproveFollowCommand(connectionData));
         }
 
@@ -160,6 +171,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/block")]
         public async Task<bool> BlockAsync(ConnectionData connectionData)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new BlockCommand(connectionData));
         }
 
@@ -171,6 +184,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/unblock")]
         public async Task<bool> UnblockBlockAsync(ConnectionData connectionData)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new UnblockCommand(connectionData));
         }
 
@@ -182,6 +197,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/getBlocked")]
         public async Task<IReadOnlyList<Guid>> GetBlockedAsync(Guid sourceId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new GetBlockedCommand(sourceId));
         }
 
@@ -193,6 +210,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/getWhoBlocksMe")]
         public async Task<IReadOnlyList<Guid>> GetWhoBlocksMe(Guid sourceId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new GetWhoBlocksMeCommand(sourceId));
         }
 
@@ -201,6 +220,8 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/getFollowRecommendations")]
         public async Task<IReadOnlyList<Guid>> GetFollowRecommendations(Guid sourceId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new GetFollowRecommendationsCommand(sourceId));
         }
 
