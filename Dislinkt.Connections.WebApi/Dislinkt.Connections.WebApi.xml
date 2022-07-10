@@ -9,7 +9,7 @@
             Main controller
             </summary>
         </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.#ctor(MediatR.IMediator)">
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.#ctor(MediatR.IMediator,OpenTracing.ITracer)">
             <summary>
             Constructor.
             </summary>
@@ -17,16 +17,6 @@
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.Index">
             <summary>
             INdex
-            </summary>
-        </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RegisterUserAsync(Dislinkt.Connections.UserData)">
-            <summary>
-            Creates a new node in graph database.
-            </summary>
-        </member>
-        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.RemoveConnectionAsync(Dislinkt.Connections.ConnectionData)">
-            <summary>
-            Removes a relationship between 2 users.
             </summary>
         </member>
         <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetFollowingAsync(System.Guid)">
@@ -74,6 +64,11 @@
             Gets all blocked users for a given ID.
             </summary>
         </member>
+        <member name="M:Dislinkt.Connections.WebApi.Controllers.ConnectionsController.GetWhoBlocksMe(System.Guid)">
+            <summary>
+            Gets the users that block the user with given ID.
+            </summary>
+        </member>
         <member name="T:Dislinkt.Connections.WebApi.Program">
             <summary>
             Program init
@@ -113,6 +108,102 @@
             <summary>
             This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             </summary>
+        </member>
+        <member name="T:GrpcAddNotificationService.AddNotificationReflection">
+            <summary>Holder for reflection information generated from Protos/addNotification.proto</summary>
+        </member>
+        <member name="P:GrpcAddNotificationService.AddNotificationReflection.Descriptor">
+            <summary>File descriptor for Protos/addNotification.proto</summary>
+        </member>
+        <member name="F:GrpcAddNotificationService.NotificationRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="F:GrpcAddNotificationService.NotificationRequest.FromFieldNumber">
+            <summary>Field number for the "From" field.</summary>
+        </member>
+        <member name="F:GrpcAddNotificationService.NotificationRequest.TypeFieldNumber">
+            <summary>Field number for the "Type" field.</summary>
+        </member>
+        <member name="F:GrpcAddNotificationService.NotificationRequest.SeenFieldNumber">
+            <summary>Field number for the "Seen" field.</summary>
+        </member>
+        <member name="F:GrpcAddNotificationService.NotificationReply.SuccessfulFieldNumber">
+            <summary>Field number for the "successful" field.</summary>
+        </member>
+        <member name="F:GrpcAddNotificationService.NotificationReply.MessageFieldNumber">
+            <summary>Field number for the "message" field.</summary>
+        </member>
+        <member name="P:GrpcAddNotificationService.addNotificationGreeter.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:GrpcAddNotificationService.addNotificationGreeter.addNotificationGreeterClient">
+            <summary>Client for addNotificationGreeter</summary>
+        </member>
+        <member name="M:GrpcAddNotificationService.addNotificationGreeter.addNotificationGreeterClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for addNotificationGreeter</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:GrpcAddNotificationService.addNotificationGreeter.addNotificationGreeterClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for addNotificationGreeter that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:GrpcAddNotificationService.addNotificationGreeter.addNotificationGreeterClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:GrpcAddNotificationService.addNotificationGreeter.addNotificationGreeterClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:GrpcAddNotificationService.addNotificationGreeter.addNotificationGreeterClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+        <member name="T:GrpcAddActivityService.AddActivityReflection">
+            <summary>Holder for reflection information generated from Protos/addActivity.proto</summary>
+        </member>
+        <member name="P:GrpcAddActivityService.AddActivityReflection.Descriptor">
+            <summary>File descriptor for Protos/addActivity.proto</summary>
+        </member>
+        <member name="F:GrpcAddActivityService.ActivityRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="F:GrpcAddActivityService.ActivityRequest.TextFieldNumber">
+            <summary>Field number for the "Text" field.</summary>
+        </member>
+        <member name="F:GrpcAddActivityService.ActivityRequest.TypeFieldNumber">
+            <summary>Field number for the "Type" field.</summary>
+        </member>
+        <member name="F:GrpcAddActivityService.ActivityRequest.DateFieldNumber">
+            <summary>Field number for the "Date" field.</summary>
+        </member>
+        <member name="F:GrpcAddActivityService.ActivityReply.SuccessfulFieldNumber">
+            <summary>Field number for the "successful" field.</summary>
+        </member>
+        <member name="F:GrpcAddActivityService.ActivityReply.MessageFieldNumber">
+            <summary>Field number for the "message" field.</summary>
+        </member>
+        <member name="P:GrpcAddActivityService.addActivityGreeter.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:GrpcAddActivityService.addActivityGreeter.addActivityGreeterClient">
+            <summary>Client for addActivityGreeter</summary>
+        </member>
+        <member name="M:GrpcAddActivityService.addActivityGreeter.addActivityGreeterClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for addActivityGreeter</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:GrpcAddActivityService.addActivityGreeter.addActivityGreeterClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for addActivityGreeter that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:GrpcAddActivityService.addActivityGreeter.addActivityGreeterClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:GrpcAddActivityService.addActivityGreeter.addActivityGreeterClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:GrpcAddActivityService.addActivityGreeter.addActivityGreeterClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
         </member>
     </members>
 </doc>
