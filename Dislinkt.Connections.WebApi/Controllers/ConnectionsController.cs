@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Dislinkt.Connections.Application.ApproveFollow.Commands;
@@ -20,6 +21,7 @@ using Dislinkt.Connections.Application.Unblock.Commands;
 using Dislinkt.Connections.Application.Unfollow.Commands;
 using Dislinkt.Connections.Persistence.Neo4j;
 using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using GrpcAddActivityService;
 using GrpcAddNotificationService;
 using MediatR;
@@ -98,17 +100,21 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             var actionName = ControllerContext.ActionDescriptor.DisplayName;
             using var scope = _tracer.BuildSpan(actionName).StartActive(true);
-            var channel = GrpcChannel.ForAddress("http://dislinkt.admindashboard:5003/");
+            var handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            var channel = GrpcChannel.ForAddress("http://dislinkt.admindashboard:5001/", new GrpcChannelOptions
+            {
+                HttpClient = new HttpClient(handler)
+            });
             var client = new addActivityGreeter.addActivityGreeterClient(channel);
-            var reply= client.addActivity(new ActivityRequest { UserId = connectionData.SourceId, Text ="Create connection", Type = "Connection", Date = DateTime.Now.ToString() });
+            var reply= await client.addActivityAsync(new ActivityRequest { UserId = connectionData.SourceId, Text ="Create connection", Type = "Connection", Date = DateTime.Now.ToString() });
 
             if (!reply.Successful)
             {
-                Debug.WriteLine("Doslo je do greske prilikom kreiranja notifikacija za usera");
+                Console.WriteLine("Doslo je do greske prilikom kreiranja notifikacija za usera");
                 return false;
             }
 
-            Debug.WriteLine("Uspesno prosledjen na registraciju u notifikacijama -- " + reply.Message);
+            Console.WriteLine("Uspesno prosledjen na registraciju u notifikacijama -- " + reply.Message);
 
             return await _mediator.Send(new FollowCommand(connectionData));
         }
