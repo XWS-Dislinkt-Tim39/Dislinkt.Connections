@@ -55,7 +55,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         [Route("/")]
         public string Index()
         {
-            return "hello";
+            return "Hello from Connections";
         }
         /// <summary>
         /// Register user,create node
@@ -97,7 +97,7 @@ namespace Dislinkt.Connections.WebApi.Controllers
         {
             var actionName = ControllerContext.ActionDescriptor.DisplayName;
             using var scope = _tracer.BuildSpan(actionName).StartActive(true);
-            var channel = GrpcChannel.ForAddress("https://localhost:5003/");
+            var channel = GrpcChannel.ForAddress("http://dislinkt.admindashboard:5003/");
             var client = new addActivityGreeter.addActivityGreeterClient(channel);
             var reply= client.addActivity(new ActivityRequest { UserId = connectionData.SourceId, Text ="Create connection", Type = "Connection", Date = DateTime.Now.ToString() });
 

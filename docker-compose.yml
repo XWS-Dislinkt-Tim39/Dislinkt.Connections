@@ -15,9 +15,7 @@ services:
         - JAEGER_AGENT_HOST=jaeger
         - JAEGER_AGENT_PORT=6831     
         - JAEGER_SAMPLER_MANAGER_HOST_PORT=jaeger:5778
-    ports:
-        - 8082:80
-        - 8084:443
+    
     depends_on:
         prometheus:
             condition: service_healthy

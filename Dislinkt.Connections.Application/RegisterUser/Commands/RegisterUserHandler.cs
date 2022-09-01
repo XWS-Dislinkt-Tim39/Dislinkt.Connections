@@ -29,7 +29,7 @@ namespace Dislinkt.Connections.Application.RegisterUser.Commands
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         
