@@ -74,6 +74,7 @@ namespace Dislinkt.Connections.Persistence.Neo4j.Common
                 Trace.WriteLine($"{query} - {ex}");
                 throw;
             }
+
         }
 
 

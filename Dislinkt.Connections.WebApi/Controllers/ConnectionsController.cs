@@ -14,6 +14,7 @@ using Dislinkt.Connections.Application.GetFollowRecommendations.Commands;
 using Dislinkt.Connections.Application.GetFollowRequests.Commands;
 using Dislinkt.Connections.Application.GetWhoBlocksMe.Commands;
 using Dislinkt.Connections.Application.RegisterUser.Commands;
+using Dislinkt.Connections.Application.RejectFollow.Commands;
 using Dislinkt.Connections.Application.RemoveConnection.Commands;
 using Dislinkt.Connections.Application.Unblock.Commands;
 using Dislinkt.Connections.Application.Unfollow.Commands;
@@ -179,6 +180,20 @@ namespace Dislinkt.Connections.WebApi.Controllers
             var actionName = ControllerContext.ActionDescriptor.DisplayName;
             using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new ApproveFollowCommand(connectionData));
+        }
+
+
+        /// <summary>
+        /// Reject a follow request.
+        /// </summary>
+        [HttpPost]
+        [Authorize]
+        [Route("/rejectFollow")]
+        public async Task<bool> RejectFollowAsync(ConnectionData connectionData)
+        {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
+            return await _mediator.Send(new RejectFollowCommand(connectionData));
         }
 
         /// <summary>
